@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/data-stream-as-disjoint-intervals/#/description
 /**
  * Definition for an interval.
  * struct Interval {
