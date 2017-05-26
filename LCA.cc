@@ -45,6 +45,7 @@ TreeNode* buildTree(const string& bfs) {
   string token;
   queue<TreeNode*> q;
   if (!getline(iss, token, ',')) {
+    cout << "Input error." << endl;
     return nullptr;
   }
   TreeNode * root = new TreeNode(stoi(token));
@@ -53,7 +54,8 @@ TreeNode* buildTree(const string& bfs) {
     TreeNode* pa = q.front();
     q.pop();
     if (!getline(iss, token, ',')) {
-      return root;
+      cout << "Input error." << endl;
+      return nullptr;
     }
     if (token != "#") {
       TreeNode* node = new TreeNode(stoi(token));
@@ -61,7 +63,8 @@ TreeNode* buildTree(const string& bfs) {
       q.push(node);
     }
     if (!getline(iss, token, ',')) {
-       return root;
+       cout << "Input error." << endl;
+       return nullptr;
     }
     if (token != "#") {
       TreeNode* node = new TreeNode(stoi(token));
@@ -79,6 +82,13 @@ void printTree(const TreeNode* root) {
   printTree(root->right);
 }
 
+void deleteTree(const TreeNode* root) {
+  if (!root) return;
+  deleteTree(root->left);
+  deleteTree(root->right);
+  delete root;
+}
+
 int main() {
   TreeNode* root = buildTree("1,2,3,4,#,6,7,#,5,#,#,8,#");
   printTree(root);
@@ -87,5 +97,6 @@ int main() {
   cout << LCA(root, root->left->left, root->right->left)->val << endl;
   cout << LCA(root, root->left->left, root->left->left->right)->val << endl;
   cout << LCA(root, root->right->left, root->right->right)->val << endl;
+  delete(root);
   return 0;
 }
