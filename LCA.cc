@@ -97,6 +97,6 @@ int main() {
   cout << LCA(root, root->left->left, root->right->left)->val << endl;
   cout << LCA(root, root->left->left, root->left->left->right)->val << endl;
   cout << LCA(root, root->right->left, root->right->right)->val << endl;
-  delete(root);
+  deleteTree(root);
   return 0;
 }
