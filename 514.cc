@@ -21,4 +21,34 @@ public:
         }
         return dp[0][0] + m;
     }
+    
+    //Solution 2
+    unordered_map<string, unordered_map<int, int>> mp;
+    int findRotateSteps2(string ring, string key) {
+        if (ring.empty() || key.empty()) return 0;
+        return dfs(ring, key, 0);
+    }
+    
+    int dfs(string ring, string key, int pos) {
+        if (pos == key.size()) return 0;
+        if (mp.find(ring) != mp.end()) {
+            if (mp[ring].find(pos) != mp[ring].end()) {
+                return mp[ring][pos];
+            }
+        }
+        char k = key[pos];
+        int first = ring.find_first_of(k);
+        int last = ring.find_last_of(k);
+        int firstStep = 1 + first + dfs(rollString(ring, first), key, pos+1);
+        int lastStep = 1 + ring.size() - last + dfs(rollString(ring, last), key, pos+1);
+        int step = min(firstStep, lastStep);
+        mp[ring][pos] = step;
+        return step;
+    }
+    
+    string rollString(string s, int idx) {
+        idx = idx % s.size();
+        if (idx == 0) return s;
+        return s.substr(idx) + s.substr(0, idx);
+    }
 };
