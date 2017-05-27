@@ -22,10 +22,8 @@ public:
             int len = j - i +1;
             if (len + mp[board[i]] >= 3) {
                 string newboard = board;
-                int ball = 3 - len > 0 ? 3 - len : 0;
-                if (ball > 0) {
-                    newboard.insert(i, ball, board[i]);
-                }
+                int ball = 3 - len;
+                newboard.insert(i, ball, board[i]);
                 mp[board[i]] -= ball;
                 int next = helper(newboard, n - ball, mp);
                 if (next != INT_MAX) {
