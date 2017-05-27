@@ -15,6 +15,9 @@ public:
         if (board == "") {
             return 0;
         }
+        if (n == 0) {
+            return INT_MAX;
+        }
         int ans = INT_MAX;
         for(int i = 0; i < board.size();) {
             int j = i;
