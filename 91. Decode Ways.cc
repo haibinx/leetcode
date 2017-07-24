@@ -23,12 +23,11 @@ public:
         if (s.empty() || s == "0") return 0;
         int n = s.size();
         int ans = 1;
-        int prev = 1;
+        int prev;
         for (int i = 1; i <= n; i++ ) {
+            int temp = ans;
             if (s[i-1] == '0') {
                ans = 0;
-           } else {
-            ans = temp;
            }
            if (i > 1 && (s[i-2] == '1' || (s[i-2] == '2' && s[i-1] < '7') )) {
                ans += prev;
