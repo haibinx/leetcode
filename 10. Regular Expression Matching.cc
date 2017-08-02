@@ -20,15 +20,8 @@ public:
         for (int si = 0; si <= lens; si++) {
             for (int pi = 1; pi <= lenp; pi++) {
                 if (p[pi-1] == '*') {
-                    dp[si][pi] = (pi > 1 && (
-                                            dp[si][pi-2] || 
-                                            si > 0 && (
-                                                        p[pi-2] == '.' || 
-                                                        p[pi-2] == s[si-1]
-                                                        ) &&
-                                            dp[si-1][pi]
-                                            )
-                                );
+                    dp[si][pi] = (pi > 1 && dp[si][pi-2]) || 
+                                 (si > 0 &&  (p[pi-2] == '.' || p[pi-2] == s[si-1]) &&dp[si-1][pi]);
                 } else {
                     if (si > 0 && (p[pi-1] == '.' || p[pi-1] == s[si-1])) dp[si][pi] = dp[si-1][pi-1];
                     else dp[si][pi] = false;
